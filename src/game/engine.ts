@@ -29,23 +29,56 @@ export function createGameState(adventure: Adventure): GameState {
   // Validate adventure for conflicts
   validateAdventure(adventure);
 
+  const startingRoom = adventure.rooms.find((r) => r.id === adventure.startingRoomId);
+  const gameHistory: GameMessage[] = [
+    {
+      type: 'system',
+      text: `Welcome to ${adventure.title}!\n\nType "help" at any time for a list of commands.`,
+      timestamp: Date.now(),
+    },
+  ];
+
+  // Add the starting room description (as if user typed "look")
+  if (startingRoom) {
+    let description = `\n=== ${startingRoom.title} ===\n${startingRoom.description}`;
+
+    if (startingRoom.objects && startingRoom.objects.length > 0) {
+      description += '\n\nYou can see:';
+      startingRoom.objects.forEach((obj) => {
+        description += `\n  - ${obj.name}`;
+      });
+    }
+
+    if (startingRoom.features && startingRoom.features.length > 0) {
+      description += '\n\nYou notice:';
+      startingRoom.features.forEach((feature) => {
+        description += `\n  - ${feature}`;
+      });
+    }
+
+    if (startingRoom.exits && startingRoom.exits.length > 0) {
+      description += '\n\nExits:';
+      startingRoom.exits
+        .filter((e) => !e.isHidden)
+        .forEach((exit) => {
+          const desc = exit.description || `(${exit.direction})`;
+          description += `\n  - ${exit.direction}: ${desc}`;
+        });
+    }
+
+    gameHistory.push({
+      type: 'narration',
+      text: description,
+      timestamp: Date.now(),
+    });
+  }
+
   return {
     currentAdventure: adventure,
     currentRoomId: adventure.startingRoomId,
     inventory: [],
     visitedRoomIds: new Set([adventure.startingRoomId]),
-    gameHistory: [
-      {
-        type: 'system',
-        text: `Welcome to ${adventure.title}!\n\nType "help" at any time for a list of commands.`,
-        timestamp: Date.now(),
-      },
-      {
-        type: 'system',
-        text: HELP_TEXT,
-        timestamp: Date.now(),
-      },
-    ],
+    gameHistory,
     gameOver: false,
     gameWon: false,
     exited: false,
