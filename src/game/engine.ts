@@ -52,7 +52,8 @@ export function createGameState(adventure: Adventure): GameState {
     if (startingRoom.features && startingRoom.features.length > 0) {
       description += '\n\nYou notice:';
       startingRoom.features.forEach((feature) => {
-        description += `\n  - ${feature}`;
+        const featureName = typeof feature === 'string' ? feature : feature.name;
+        description += `\n  - ${featureName}`;
       });
     }
 
@@ -99,6 +100,26 @@ function findObjectInRoom(room: any, searchName: string): any {
       obj.name.toLowerCase() === lowerSearchName ||
       (obj.aliases && obj.aliases.some((alias: string) => alias.toLowerCase() === lowerSearchName))
   );
+}
+
+/**
+ * Find a feature in a room by name or alias
+ */
+function findFeatureInRoom(room: any, searchName: string): any {
+  const lowerSearchName = searchName.toLowerCase();
+  if (!room.features) return null;
+
+  return room.features.find((feature: any) => {
+    // Handle string features (backward compatibility)
+    if (typeof feature === 'string') {
+      return feature.toLowerCase() === lowerSearchName;
+    }
+    // Handle feature objects with name and aliases
+    return (
+      feature.name.toLowerCase() === lowerSearchName ||
+      (feature.aliases && feature.aliases.some((alias: string) => alias.toLowerCase() === lowerSearchName))
+    );
+  });
 }
 
 export function executeCommand(state: GameState, input: string): GameState {
@@ -234,7 +255,8 @@ function handleLookCommand(state: GameState): GameState {
   if (currentRoom.features && currentRoom.features.length > 0) {
     description += '\n\nYou notice:';
     currentRoom.features.forEach((feature) => {
-      description += `\n  - ${feature}`;
+      const featureName = typeof feature === 'string' ? feature : feature.name;
+      description += `\n  - ${featureName}`;
     });
   }
 
@@ -283,6 +305,19 @@ function handleExamineCommand(state: GameState, command: ParsedCommand): GameSta
     }
 
     return newState;
+  }
+
+  // Look for features in the room
+  const roomFeature = findFeatureInRoom(currentRoom, command.objectName);
+
+  if (roomFeature) {
+    // Handle string features (backward compatibility)
+    if (typeof roomFeature === 'string') {
+      return addMessage(state, 'narration', 'There is nothing more of interest here.');
+    }
+    // Handle feature objects with examination text
+    const text = roomFeature.examinationText || 'There is nothing more of interest here.';
+    return addMessage(state, 'narration', text);
   }
 
   // Look in inventory

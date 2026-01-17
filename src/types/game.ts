@@ -28,13 +28,19 @@ export interface Exit {
   blockedMessage?: string;
 }
 
+export interface GameFeature {
+  name: string;
+  aliases?: string[];
+  examinationText?: string;
+}
+
 export interface Room {
   id: string;
   title: string;
   description: string;
   exits: Exit[];
   objects: GameObject[];
-  features?: string[]; // descriptions of features that can't be picked up
+  features?: (string | GameFeature)[]; // descriptions of features that can't be picked up
 }
 
 export interface Adventure {
