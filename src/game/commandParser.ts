@@ -50,7 +50,7 @@ export function parseCommand(input: string): ParsedCommand {
   }
 
   // Handle "look" command
-  if (firstWord === 'look') {
+  if (firstWord === 'look' || firstWord === 'l') {
     const rest = parts.slice(1).join(' ');
     
     // "look at X" or just "look"

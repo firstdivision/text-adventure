@@ -12,14 +12,15 @@ import { parseCommand } from './commandParser';
 
 const HELP_TEXT = `
 Available Commands:
-  go [direction]      - Move in a direction (north, south, east, west, up, down)
-  look               - Examine the current room
-  examine [object]   - Examine an object in detail
-  take [object]      - Pick up an item
-  drop [object]      - Drop an item from inventory
-  inventory          - Check what you're carrying
-  read [object]      - Read a readable object
-  help               - Show this help message
+  go [direction]           - Move in a direction (or just type the direction)
+                            Directions: north/n, south/s, east/e, west/w, up/u, down/d
+  look (l)                - Examine the current room
+  examine [object] (x)    - Examine an object in detail
+  take [object] (get)     - Pick up an item
+  drop [object]           - Drop an item from inventory
+  inventory (i, inv)      - Check what you're carrying
+  read [object]           - Read a readable object
+  help (?)                - Show this help message
 `;
 
 export function createGameState(adventure: Adventure): GameState {
@@ -30,8 +31,13 @@ export function createGameState(adventure: Adventure): GameState {
     visitedRoomIds: new Set([adventure.startingRoomId]),
     gameHistory: [
       {
-        type: 'narration',
-        text: `Welcome to ${adventure.title}`,
+        type: 'system',
+        text: `Welcome to ${adventure.title}!\n\nType "help" at any time for a list of commands.`,
+        timestamp: Date.now(),
+      },
+      {
+        type: 'system',
+        text: HELP_TEXT,
         timestamp: Date.now(),
       },
     ],
