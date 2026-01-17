@@ -383,6 +383,24 @@
   .game-display {
     margin-bottom: 0.5rem;
   }
+
+  .adventure-selection-screen {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .adventure-list {
+    min-width: auto;
+  }
+
+  .adventure-details {
+    align-items: stretch;
+  }
+
+  .adventure-info {
+    width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
