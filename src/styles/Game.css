@@ -46,15 +46,6 @@
   min-width: 0;
 }
 
-.game-sidebar {
-  width: 220px;
-  background-color: rgba(0, 0, 0, 0.3);
-  border: 1px solid #00d4ff;
-  border-radius: 4px;
-  padding: 1rem;
-  overflow-y: auto;
-}
-
 /* Game Display (Messages) */
 .game-display {
   flex: 1;
@@ -242,20 +233,6 @@
 
 /* Responsive Design for Tablets and Mobile */
 @media (max-width: 768px) {
-  .game-main {
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .game-sidebar {
-    width: 100%;
-    border: none;
-    border-top: 1px solid #333;
-    padding: 0.5rem;
-    max-height: 150px;
-    border-radius: 0;
-  }
-
   .game-header h1 {
     font-size: 1.4rem;
   }
@@ -266,21 +243,6 @@
 
   .game-display {
     margin-bottom: 0.5rem;
-  }
-
-  .inventory-panel {
-    border-top: 2px solid #00d4ff;
-  }
-
-  .inventory-panel h3 {
-    font-size: 0.9rem;
-    margin-bottom: 0.3rem;
-  }
-
-  .inventory-item {
-    font-size: 0.85rem;
-    padding: 0.3rem 0.4rem;
-    margin-bottom: 0.2rem;
   }
 }
 
@@ -328,19 +290,6 @@
     padding: 0.3rem;
     font-size: 0.9rem;
     line-height: 1.5;
-  }
-
-  .game-sidebar {
-    max-height: 120px;
-  }
-
-  .inventory-panel h3 {
-    font-size: 0.85rem;
-  }
-
-  .inventory-item {
-    font-size: 0.8rem;
-    padding: 0.25rem 0.3rem;
   }
 }
 

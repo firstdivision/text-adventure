@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { GameDisplay, CommandInput, InventoryDisplay } from './GameComponents';
+import { GameDisplay, CommandInput } from './GameComponents';
 import { createGameState, executeCommand } from '../game/engine';
 import type { GameState } from '../types/game';
 import { lostLibraryAdventure } from '../adventures/lostLibrary';
@@ -25,10 +25,6 @@ export const Game: React.FC = () => {
         <div className="game-content">
           <GameDisplay gameState={gameState} />
         </div>
-
-        <aside className="game-sidebar">
-          <InventoryDisplay inventory={gameState.inventory} />
-        </aside>
       </main>
 
       <footer className="game-footer">
