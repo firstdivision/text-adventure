@@ -2,12 +2,12 @@ import React, { useState, useCallback } from 'react';
 import { GameDisplay, CommandInput } from './GameComponents';
 import { createGameState, executeCommand } from '../game/engine';
 import type { GameState } from '../types/game';
-import { lostLibraryAdventure } from '../adventures/lostLibrary';
+import { theHiddenTreasureAdventure } from '../adventures/theHiddenTreasure';
 import '../styles/Game.css';
 
 export const Game: React.FC = () => {
   const [gameState, setGameState] = useState<GameState>(() =>
-    createGameState(lostLibraryAdventure)
+    createGameState(theHiddenTreasureAdventure)
   );
 
   const handleCommand = useCallback((command: string) => {

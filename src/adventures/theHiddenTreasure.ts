@@ -5,7 +5,7 @@ import type { Adventure } from '../types/game';
  * A quick treasure hunt with a clear win condition
  */
 
-export const lostLibraryAdventure: Adventure = {
+export const theHiddenTreasureAdventure: Adventure = {
   id: 'treasure-hunt',
   title: 'The Hidden Treasure',
   description: 'You find yourself in an old cottage. Rumors speak of a hidden treasure somewhere nearby.',
