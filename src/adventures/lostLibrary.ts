@@ -44,6 +44,7 @@ export const lostLibraryAdventure: Adventure = {
         {
           id: 'brass-key',
           name: 'brass key',
+          aliases: ['key', 'brass'],
           description: 'A small brass key sits on the desk.',
           isPickupable: true,
           isExaminable: true,
@@ -53,6 +54,7 @@ export const lostLibraryAdventure: Adventure = {
         {
           id: 'ledger',
           name: 'ledger',
+          aliases: ['book', 'journal'],
           description: 'An old leather-bound ledger rests on the desk.',
           isPickupable: true,
           isReadable: true,
@@ -97,6 +99,7 @@ export const lostLibraryAdventure: Adventure = {
         {
           id: 'newspaper',
           name: 'old newspaper',
+          aliases: ['newspaper', 'paper'],
           description: 'A yellowed newspaper sits on one of the tables.',
           isPickupable: true,
           isReadable: true,
@@ -138,6 +141,7 @@ export const lostLibraryAdventure: Adventure = {
         {
           id: 'ancient-map',
           name: 'ancient map',
+          aliases: ['map', 'parchment'],
           description:
             'A rolled parchment map lies on a reading table among the stacks.',
           isPickupable: true,
@@ -172,6 +176,7 @@ export const lostLibraryAdventure: Adventure = {
         {
           id: 'mirror',
           name: 'ornate mirror',
+          aliases: ['mirror', 'glass'],
           description:
             'A beautiful ornate mirror hangs on the wall. Your reflection seems slightly off.',
           isExaminable: true,
@@ -201,6 +206,7 @@ export const lostLibraryAdventure: Adventure = {
         {
           id: 'ancient-scroll',
           name: 'ancient scroll',
+          aliases: ['scroll', 'parchment'],
           description:
             'A cloth-wrapped scroll sits under glass in the center of the vault.',
           isPickupable: true,
@@ -235,6 +241,7 @@ export const lostLibraryAdventure: Adventure = {
         {
           id: 'rusty-key',
           name: 'rusty key',
+          aliases: ['key', 'rusty'],
           description: 'A heavily corroded iron key hangs from a hook on the wall.',
           isPickupable: true,
           isExaminable: true,
@@ -260,6 +267,7 @@ export const lostLibraryAdventure: Adventure = {
         {
           id: 'crystal',
           name: 'crystal',
+          aliases: ['gem', 'stone'],
           description:
             'A glowing crystal sits on the stone altar, pulsing with soft light.',
           isPickupable: true,
@@ -290,6 +298,7 @@ export const lostLibraryAdventure: Adventure = {
         {
           id: 'forbidden-scroll',
           name: 'forbidden scroll',
+          aliases: ['scroll', 'parchment', 'text'],
           description: 'A sealed scroll with warnings etched upon it.',
           isPickupable: true,
           isReadable: true,

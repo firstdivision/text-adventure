@@ -50,6 +50,18 @@ export function getCurrentRoom(state: GameState) {
   return state.currentAdventure.rooms.find((r) => r.id === state.currentRoomId);
 }
 
+/**
+ * Find an object by name or alias in a room
+ */
+function findObjectInRoom(room: any, searchName: string): any {
+  const lowerSearchName = searchName.toLowerCase();
+  return room.objects.find(
+    (obj: any) =>
+      obj.name.toLowerCase() === lowerSearchName ||
+      (obj.aliases && obj.aliases.some((alias: string) => alias.toLowerCase() === lowerSearchName))
+  );
+}
+
 export function executeCommand(state: GameState, input: string): GameState {
   if (state.gameOver || state.gameWon) {
     return addMessage(state, 'system', 'Game has ended. Please refresh to restart.');
@@ -206,12 +218,8 @@ function handleExamineCommand(state: GameState, command: ParsedCommand): GameSta
     return addMessage(state, 'error', 'Error: Current room not found.');
   }
 
-  const objectName = command.objectName.toLowerCase();
-
   // Look in room objects
-  const roomObject = currentRoom.objects.find(
-    (obj) => obj.name.toLowerCase() === objectName
-  );
+  const roomObject = findObjectInRoom(currentRoom, command.objectName);
 
   if (roomObject) {
     if (!roomObject.isExaminable) {
@@ -306,9 +314,10 @@ function handleTakeCommand(state: GameState, command: ParsedCommand): GameState 
     return addMessage(state, 'error', 'Error: Current room not found.');
   }
 
-  const objectName = command.objectName.toLowerCase();
   const objectIndex = currentRoom.objects.findIndex(
-    (obj) => obj.name.toLowerCase() === objectName
+    (obj) =>
+      obj.name.toLowerCase() === command.objectName.toLowerCase() ||
+      (obj.aliases && obj.aliases.some((alias: string) => alias.toLowerCase() === command.objectName.toLowerCase()))
   );
 
   if (objectIndex === -1) {
@@ -346,9 +355,10 @@ function handleDropCommand(state: GameState, command: ParsedCommand): GameState 
     return addMessage(state, 'error', 'Drop what?');
   }
 
-  const objectName = command.objectName.toLowerCase();
   const objectIndex = state.inventory.findIndex(
-    (obj) => obj.name.toLowerCase() === objectName
+    (obj) =>
+      obj.name.toLowerCase() === command.objectName.toLowerCase() ||
+      (obj.aliases && obj.aliases.some((alias: string) => alias.toLowerCase() === command.objectName.toLowerCase()))
   );
 
   if (objectIndex === -1) {
@@ -405,12 +415,8 @@ function handleReadCommand(state: GameState, command: ParsedCommand): GameState 
     return addMessage(state, 'error', 'Error: Current room not found.');
   }
 
-  const objectName = command.objectName.toLowerCase();
-
   // Look in room objects
-  const roomObject = currentRoom.objects.find(
-    (obj) => obj.name.toLowerCase() === objectName
-  );
+  const roomObject = findObjectInRoom(currentRoom, command.objectName);
 
   if (roomObject) {
     if (!roomObject.isReadable) {

@@ -6,6 +6,7 @@ export interface GameObject {
   id: string;
   name: string;
   description: string;
+  aliases?: string[];
   isReadable?: boolean;
   readableText?: string;
   isPickupable?: boolean;
