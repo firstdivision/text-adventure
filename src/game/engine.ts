@@ -122,11 +122,33 @@ function handleGoCommand(state: GameState, command: ParsedCommand): GameState {
 
   const targetRoom = getCurrentRoom(newState);
   if (targetRoom) {
-    newState = addMessage(
-      newState,
-      'narration',
-      `\n=== ${targetRoom.title} ===\n${targetRoom.description}`
-    );
+    let description = `\n=== ${targetRoom.title} ===\n${targetRoom.description}`;
+
+    if (targetRoom.objects && targetRoom.objects.length > 0) {
+      description += '\n\nYou can see:';
+      targetRoom.objects.forEach((obj) => {
+        description += `\n  - ${obj.name}`;
+      });
+    }
+
+    if (targetRoom.features && targetRoom.features.length > 0) {
+      description += '\n\nYou notice:';
+      targetRoom.features.forEach((feature) => {
+        description += `\n  - ${feature}`;
+      });
+    }
+
+    if (targetRoom.exits && targetRoom.exits.length > 0) {
+      description += '\n\nExits:';
+      targetRoom.exits
+        .filter((e) => !e.isHidden)
+        .forEach((exit) => {
+          const desc = exit.description || `(${exit.direction})`;
+          description += `\n  - ${exit.direction}: ${desc}`;
+        });
+    }
+
+    newState = addMessage(newState, 'narration', description);
   }
 
   return newState;
