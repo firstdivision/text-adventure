@@ -122,5 +122,10 @@ export function parseCommand(input: string): ParsedCommand {
     return { type: 'help', rawInput: input };
   }
 
+  // Handle "exit" command
+  if (firstWord === 'exit' || firstWord === 'quit') {
+    return { type: 'exit', rawInput: input };
+  }
+
   return { type: 'unknown', rawInput: input };
 }

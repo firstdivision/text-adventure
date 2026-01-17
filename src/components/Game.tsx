@@ -24,7 +24,15 @@ export const Game: React.FC = () => {
   const handleCommand = useCallback((command: string) => {
     setGameState((prevState) => {
       if (!prevState) return null;
-      return executeCommand(prevState, command);
+      const newState = executeCommand(prevState, command);
+      
+      // If player exits, reset to adventure selection
+      if (newState.exited) {
+        setCurrentAdventure(null);
+        return null;
+      }
+      
+      return newState;
     });
   }, []);
 
@@ -86,7 +94,7 @@ export const Game: React.FC = () => {
       </main>
 
       <footer className="game-footer">
-        <CommandInput onCommand={handleCommand} disabled={gameState.gameOver || gameState.gameWon} />
+        <CommandInput onCommand={handleCommand} disabled={gameState.gameOver || gameState.gameWon || gameState.exited} />
       </footer>
     </div>
   );

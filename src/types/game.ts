@@ -53,6 +53,7 @@ export interface GameState {
   gameHistory: GameMessage[];
   gameOver: boolean;
   gameWon: boolean;
+  exited: boolean;
 }
 
 export interface GameMessage {
@@ -61,7 +62,7 @@ export interface GameMessage {
   timestamp: number;
 }
 
-export type CommandType = 'go' | 'look' | 'take' | 'drop' | 'inventory' | 'examine' | 'read' | 'help' | 'unknown';
+export type CommandType = 'go' | 'look' | 'take' | 'drop' | 'inventory' | 'examine' | 'read' | 'help' | 'exit' | 'unknown';
 
 export interface ParsedCommand {
   type: CommandType;

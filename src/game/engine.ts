@@ -21,6 +21,7 @@ Available Commands:
   drop [object]           - Drop an item from inventory
   inventory (i, inv)      - Check what you're carrying
   read [object]           - Read a readable object
+  exit (quit)             - Return to the main menu
   help (?)                - Show this help message
 `;
 
@@ -47,6 +48,7 @@ export function createGameState(adventure: Adventure): GameState {
     ],
     gameOver: false,
     gameWon: false,
+    exited: false,
   };
 }
 
@@ -98,6 +100,10 @@ export function executeCommand(state: GameState, input: string): GameState {
       break;
     case 'help':
       newState = addMessage(newState, 'system', HELP_TEXT);
+      break;
+    case 'exit':
+      newState = addMessage(newState, 'system', 'Returning to main menu...');
+      newState.exited = true;
       break;
     case 'unknown':
       newState = addMessage(newState, 'error', `I don't understand "${command.rawInput}". Type "help" for commands.`);
