@@ -12,6 +12,7 @@ export interface GameObject {
   isPickupable?: boolean;
   isExaminable?: boolean;
   examinationText?: string;
+  isWinTrigger?: boolean;
   revealsHiddenExit?: {
     direction: string;
     revealMessage?: string;

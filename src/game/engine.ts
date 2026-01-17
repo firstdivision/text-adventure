@@ -232,6 +232,12 @@ function handleExamineCommand(state: GameState, command: ParsedCommand): GameSta
     const text = roomObject.examinationText || roomObject.description;
     let newState = addMessage(state, 'narration', text);
 
+    // Check if this triggers a win condition
+    if (roomObject.isWinTrigger) {
+      newState.gameWon = true;
+      newState = addMessage(newState, 'system', '\n🎉 Victory! You have completed the Lost Library! 🎉\n');
+    }
+
     // Reveal hidden exits if this object has that property
     if (roomObject.revealsHiddenExit) {
       newState = revealHiddenExit(newState, roomObject.revealsHiddenExit);
