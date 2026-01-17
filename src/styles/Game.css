@@ -30,6 +30,118 @@
   font-size: 0.9rem;
 }
 
+.adventure-selector {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #00d4ff;
+}
+
+.adventure-selector p {
+  margin: 0 0 0.5rem 0;
+  color: #00d4ff;
+  font-size: 0.9rem;
+}
+
+.adventure-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.adventure-buttons button {
+  background-color: #16213e;
+  color: #00d4ff;
+  border: 1px solid #00d4ff;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.adventure-buttons button:hover {
+  background-color: #00d4ff;
+  color: #16213e;
+}
+
+.adventure-buttons button.active {
+  background-color: #00d4ff;
+  color: #16213e;
+  font-weight: bold;
+}
+
+/* Adventure Selection Screen */
+.adventure-selection-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 2rem;
+}
+
+.adventure-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 900px;
+}
+
+.adventure-card {
+  background-color: rgba(22, 33, 62, 0.8);
+  border: 2px solid #00d4ff;
+  border-radius: 8px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.2);
+}
+
+.adventure-card:hover {
+  border-color: #00ffff;
+  box-shadow: 0 6px 16px rgba(0, 212, 255, 0.4);
+  transform: translateY(-4px);
+}
+
+.adventure-card h2 {
+  margin: 0;
+  color: #00d4ff;
+  font-size: 1.5rem;
+  text-shadow: 0 0 8px rgba(0, 212, 255, 0.3);
+}
+
+.adventure-card p {
+  margin: 0;
+  color: #a0a0a0;
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+.start-button {
+  background-color: #00d4ff;
+  color: #16213e;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Courier New', monospace;
+}
+
+.start-button:hover {
+  background-color: #00ffff;
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
+}
+
+.start-button:active {
+  transform: scale(0.98);
+}
+
 /* Main Game Area */
 .game-main {
   display: flex;
