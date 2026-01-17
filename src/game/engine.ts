@@ -216,7 +216,8 @@ function handleGoCommand(state: GameState, command: ParsedCommand): GameState {
     if (targetRoom.features && targetRoom.features.length > 0) {
       description += '\n\nYou notice:';
       targetRoom.features.forEach((feature) => {
-        description += `\n  - ${feature}`;
+        const featureName = typeof feature === 'string' ? feature : feature.name;
+        description += `\n  - ${featureName}`;
       });
     }
 

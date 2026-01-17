@@ -1,14 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
-import type { GameState, GameMessage } from '../types/game';
+import type { GameState, GameMessage, Exit } from '../types/game';
 import '../styles/Game.css';
 
 interface GameDisplayProps {
   gameState: GameState;
+  onCommand?: (command: string) => void;
 }
 
-export const GameDisplay: React.FC<GameDisplayProps> = ({ gameState }) => {
+export const GameDisplay: React.FC<GameDisplayProps> = ({ gameState, onCommand }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [displayedMessages, setDisplayedMessages] = useState<GameMessage[]>([]);
+  const [availableExits, setAvailableExits] = useState<Exit[]>([]);
 
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
@@ -18,7 +20,22 @@ export const GameDisplay: React.FC<GameDisplayProps> = ({ gameState }) => {
   // Update displayed messages when game state changes
   useEffect(() => {
     setDisplayedMessages(gameState.gameHistory);
-  }, [gameState.gameHistory]);
+    
+    // Extract available exits from current room
+    const currentRoom = gameState.currentAdventure.rooms.find(
+      r => r.id === gameState.currentRoomId
+    );
+    if (currentRoom) {
+      const visibleExits = currentRoom.exits.filter(e => !e.isHidden);
+      setAvailableExits(visibleExits);
+    }
+  }, [gameState.gameHistory, gameState.currentRoomId, gameState.currentAdventure]);
+
+  const handleExitClick = (direction: string) => {
+    if (onCommand) {
+      onCommand(`go ${direction}`);
+    }
+  };
 
   return (
     <div className="game-display">
@@ -30,6 +47,24 @@ export const GameDisplay: React.FC<GameDisplayProps> = ({ gameState }) => {
         ))}
         <div ref={messagesEndRef} />
       </div>
+      {availableExits.length > 0 && (
+        <div className="exits-container">
+          <div className="exits-text">
+            Exits:{' '}
+            {availableExits.map((exit, index) => (
+              <span key={exit.direction}>
+                <span
+                  className="exit-link"
+                  onClick={() => handleExitClick(exit.direction)}
+                >
+                  {exit.direction}
+                </span>
+                {index < availableExits.length - 1 && ', '}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -133,7 +133,7 @@ export const Game: React.FC = () => {
 
       <main className="game-main">
         <div className="game-content">
-          <GameDisplay gameState={gameState} />
+          <GameDisplay gameState={gameState} onCommand={handleCommand} />
         </div>
       </main>
 

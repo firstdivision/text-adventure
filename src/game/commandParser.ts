@@ -29,8 +29,8 @@ export function parseCommand(input: string): ParsedCommand {
   // Handle "go" command
   if (firstWord === 'go') {
     const direction = parts[1] || '';
-    const normalized = DIRECTION_ALIASES[direction] || direction;
-    if (DIRECTIONS.includes(normalized)) {
+    if (direction) {
+      const normalized = DIRECTION_ALIASES[direction] || direction;
       return {
         type: 'go',
         direction: normalized,
@@ -40,8 +40,9 @@ export function parseCommand(input: string): ParsedCommand {
   }
 
   // Handle direction shortcuts (just typing "north" instead of "go north")
-  if (DIRECTIONS.includes(firstWord)) {
-    const normalized = DIRECTION_ALIASES[firstWord] || firstWord;
+  // Accept both standard directions and custom adventure directions
+  const normalized = DIRECTION_ALIASES[firstWord] || firstWord;
+  if (DIRECTIONS.includes(normalized)) {
     return {
       type: 'go',
       direction: normalized,
