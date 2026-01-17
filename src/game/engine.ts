@@ -238,7 +238,9 @@ function handleExamineCommand(state: GameState, command: ParsedCommand): GameSta
 
   // Look in inventory
   const inventoryObject = state.inventory.find(
-    (obj) => obj.name.toLowerCase() === objectName
+    (obj) =>
+      obj.name.toLowerCase() === command.objectName!.toLowerCase() ||
+      (obj.aliases && obj.aliases.some((alias: string) => alias.toLowerCase() === command.objectName!.toLowerCase()))
   );
 
   if (inventoryObject) {
@@ -316,8 +318,8 @@ function handleTakeCommand(state: GameState, command: ParsedCommand): GameState 
 
   const objectIndex = currentRoom.objects.findIndex(
     (obj) =>
-      obj.name.toLowerCase() === command.objectName.toLowerCase() ||
-      (obj.aliases && obj.aliases.some((alias: string) => alias.toLowerCase() === command.objectName.toLowerCase()))
+      obj.name.toLowerCase() === command.objectName!.toLowerCase() ||
+      (obj.aliases && obj.aliases.some((alias: string) => alias.toLowerCase() === command.objectName!.toLowerCase()))
   );
 
   if (objectIndex === -1) {
@@ -357,8 +359,8 @@ function handleDropCommand(state: GameState, command: ParsedCommand): GameState 
 
   const objectIndex = state.inventory.findIndex(
     (obj) =>
-      obj.name.toLowerCase() === command.objectName.toLowerCase() ||
-      (obj.aliases && obj.aliases.some((alias: string) => alias.toLowerCase() === command.objectName.toLowerCase()))
+      obj.name.toLowerCase() === command.objectName!.toLowerCase() ||
+      (obj.aliases && obj.aliases.some((alias: string) => alias.toLowerCase() === command.objectName!.toLowerCase()))
   );
 
   if (objectIndex === -1) {
@@ -428,7 +430,9 @@ function handleReadCommand(state: GameState, command: ParsedCommand): GameState 
 
   // Look in inventory
   const inventoryObject = state.inventory.find(
-    (obj) => obj.name.toLowerCase() === objectName
+    (obj) =>
+      obj.name.toLowerCase() === command.objectName!.toLowerCase() ||
+      (obj.aliases && obj.aliases.some((alias: string) => alias.toLowerCase() === command.objectName!.toLowerCase()))
   );
 
   if (inventoryObject) {
