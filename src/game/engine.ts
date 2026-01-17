@@ -5,6 +5,7 @@ import type {
   ParsedCommand,
 } from '../types/game';
 import { parseCommand } from './commandParser';
+import { validateAdventure } from './validator';
 
 /**
  * Core game engine for managing state and executing commands
@@ -24,6 +25,9 @@ Available Commands:
 `;
 
 export function createGameState(adventure: Adventure): GameState {
+  // Validate adventure for conflicts
+  validateAdventure(adventure);
+
   return {
     currentAdventure: adventure,
     currentRoomId: adventure.startingRoomId,
