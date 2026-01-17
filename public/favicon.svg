@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Background -->
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#00ffff;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#0088ff;stop-opacity:0.2" />
+    </radialGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Glow effect -->
+  <circle cx="32" cy="32" r="30" fill="url(#glow)" opacity="0.6"/>
+  
+  <!-- Book pages -->
+  <g filter="url(#shadow)">
+    <!-- Left page -->
+    <path d="M 20 14 L 30 14 L 30 50 L 20 50 Q 18 50 18 48 L 18 16 Q 18 14 20 14" 
+          fill="#1a3a4a" stroke="#00d4ff" stroke-width="1.5"/>
+    
+    <!-- Right page -->
+    <path d="M 34 14 L 44 14 Q 46 14 46 16 L 46 48 Q 46 50 44 50 L 34 50" 
+          fill="#0d2836" stroke="#00d4ff" stroke-width="1.5"/>
+    
+    <!-- Spine -->
+    <line x1="32" y1="14" x2="32" y2="50" stroke="#00d4ff" stroke-width="2"/>
+    
+    <!-- Glowing text lines on left page -->
+    <line x1="22" y1="22" x2="28" y2="22" stroke="#00ffff" stroke-width="1.5" opacity="0.8"/>
+    <line x1="22" y1="28" x2="28" y2="28" stroke="#00ffff" stroke-width="1.5" opacity="0.7"/>
+    <line x1="22" y1="34" x2="28" y2="34" stroke="#00ffff" stroke-width="1.5" opacity="0.6"/>
+    <line x1="22" y1="40" x2="26" y2="40" stroke="#00ffff" stroke-width="1.5" opacity="0.5"/>
+    
+    <!-- Glowing text lines on right page -->
+    <line x1="36" y1="22" x2="42" y2="22" stroke="#00ffff" stroke-width="1.5" opacity="0.7"/>
+    <line x1="36" y1="28" x2="42" y2="28" stroke="#00ffff" stroke-width="1.5" opacity="0.6"/>
+    <line x1="36" y1="34" x2="42" y2="34" stroke="#00ffff" stroke-width="1.5" opacity="0.5"/>
+    <line x1="36" y1="40" x2="40" y2="40" stroke="#00ffff" stroke-width="1.5" opacity="0.4"/>
+  </g>
+  
+  <!-- Corner stars for magic -->
+  <circle cx="14" cy="12" r="1.5" fill="#00ffff" opacity="0.8"/>
+  <circle cx="50" cy="12" r="1.5" fill="#00ffff" opacity="0.8"/>
+  <circle cx="14" cy="52" r="1.5" fill="#00ffff" opacity="0.8"/>
+  <circle cx="50" cy="52" r="1.5" fill="#00ffff" opacity="0.8"/>
+</svg>
